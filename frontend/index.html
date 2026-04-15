@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart API Rate Limiter</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Fullstack Demo</p>
+          <h1>Smart API Rate Limiter Dashboard</h1>
+          <p class="subtitle">
+            Log in, call a protected API, and watch the rate limit update in
+            real time.
+          </p>
+        </div>
+        <div class="badge">JWT + Redis</div>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Login</h2>
+          <form id="login-form">
+            <label>
+              Username
+              <input id="username" value="demo" required />
+            </label>
+            <label>
+              Password
+              <input id="password" type="password" value="demo123" required />
+            </label>
+            <button type="submit">Sign In</button>
+          </form>
+          <p class="hint">Demo credentials are prefilled for convenience.</p>
+        </article>
+
+        <article class="card">
+          <h2>Session</h2>
+          <div class="stats">
+            <div>
+              <span class="label">User</span>
+              <strong id="user">Not logged in</strong>
+            </div>
+            <div>
+              <span class="label">Plan</span>
+              <strong id="plan">-</strong>
+            </div>
+            <div>
+              <span class="label">Token</span>
+              <strong id="token-state">Missing</strong>
+            </div>
+          </div>
+          <button id="profile-btn" class="secondary" disabled>Load Profile</button>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Protected API</h2>
+          <p class="hint">
+            This endpoint requires a bearer token and applies a 5 requests per
+            minute limit.
+          </p>
+          <div class="actions">
+            <button id="call-btn" disabled>Call Protected API</button>
+            <button id="status-btn" class="secondary" disabled>Check Limit Status</button>
+          </div>
+          <pre id="response">No request yet.</pre>
+        </article>
+
+        <article class="card">
+          <h2>Rate Limit</h2>
+          <div class="meter-shell">
+            <div id="meter" class="meter"></div>
+          </div>
+          <div class="stats">
+            <div>
+              <span class="label">Limit</span>
+              <strong id="limit">0</strong>
+            </div>
+            <div>
+              <span class="label">Remaining</span>
+              <strong id="remaining">0</strong>
+            </div>
+            <div>
+              <span class="label">Reset In</span>
+              <strong id="reset">0s</strong>
+            </div>
+            <div>
+              <span class="label">Source</span>
+              <strong id="source">-</strong>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
