@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from app.models.schemas import RateLimitStatus
-from app.services.auth import decode_token
-from app.services.rate_limiter import SmartRateLimiter
+from backend.app.models.schemas import RateLimitStatus
+from backend.app.services.auth import decode_token
+from backend.app.services.rate_limiter import SmartRateLimiter
 
 router = APIRouter()
 security = HTTPBearer()

@@ -26,15 +26,14 @@ frontend/
   styles.css
 ```
 
-## Run The Backend
+## Run The App Locally
 
 ```bash
-cd backend
 pip install -r requirements.txt
-uvicorn main:app --reload
+uvicorn backend.main:app --reload
 ```
 
-The API will start at `http://127.0.0.1:8000`.
+The app will start at `http://127.0.0.1:8000`.
 
 ## Optional Redis
 
@@ -45,9 +44,7 @@ cd backend
 docker-compose up
 ```
 
-## Frontend
-
-Open `frontend/index.html` in a browser after the backend is running.
+The frontend is served by FastAPI at `/`, so you do not need a separate frontend server.
 
 ## Demo Credentials
 
@@ -56,12 +53,19 @@ Open `frontend/index.html` in a browser after the backend is running.
 
 ## API Endpoints
 
-- `POST /auth/login`
-- `GET /auth/me`
-- `GET /protected-api`
-- `GET /rate-limit/status`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `GET /api/protected-api`
+- `GET /api/rate-limit/status`
 
 ## Notes
 
 - The demo user is stored in-memory for simplicity.
 - Replace the secret key and move credentials to a database for production use.
+- On Vercel, the in-memory limiter is best-effort only. Use a hosted Redis instance for consistent cross-request limits.
+
+## Deploy To Vercel
+
+- `api/index.py` is the Vercel Python entrypoint.
+- `vercel.json` includes the backend and frontend files in the deployment bundle.
+- The frontend calls the API with same-origin relative URLs, so it works on the deployed domain without extra CORS setup.

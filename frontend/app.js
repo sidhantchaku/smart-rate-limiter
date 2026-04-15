@@ -1,4 +1,4 @@
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = window.location.origin;
 
 const elements = {
   form: document.getElementById("login-form"),
@@ -75,7 +75,7 @@ function renderResponse(data) {
 elements.form.addEventListener("submit", async (event) => {
   event.preventDefault();
   try {
-    const data = await request("/auth/login", {
+    const data = await request("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({
         username: elements.username.value,
@@ -95,7 +95,7 @@ elements.form.addEventListener("submit", async (event) => {
 
 elements.profileBtn.addEventListener("click", async () => {
   try {
-    const data = await request("/auth/me");
+    const data = await request("/api/auth/me");
     setSession(data.username, data.plan);
     renderResponse(data);
   } catch (error) {
@@ -105,7 +105,7 @@ elements.profileBtn.addEventListener("click", async () => {
 
 elements.callBtn.addEventListener("click", async () => {
   try {
-    const data = await request("/protected-api");
+    const data = await request("/api/protected-api");
     updateRateLimit(data.rate_limit);
     renderResponse(data);
   } catch (error) {
@@ -120,7 +120,7 @@ elements.callBtn.addEventListener("click", async () => {
 
 elements.statusBtn.addEventListener("click", async () => {
   try {
-    const data = await request("/rate-limit/status");
+    const data = await request("/api/rate-limit/status");
     updateRateLimit(data);
     renderResponse(data);
   } catch (error) {
