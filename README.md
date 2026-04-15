@@ -1,5 +1,7 @@
 # Smart API Rate Limiter
 
+Web App Link: [Click Here](https://smart-rate-limiter-fan1jmet1-sidhantchakus-projects.vercel.app/)
+
 A small fullstack starter built from the ZIP reference you shared.
 
 ## Stack
